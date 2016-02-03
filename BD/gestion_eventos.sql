@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.12
+-- version 4.5.3.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2015 a las 08:18:37
--- Versión del servidor: 5.6.25
--- Versión de PHP: 5.5.27
+-- Servidor: localhost
+-- Tiempo de generación: 03-02-2016 a las 23:07:27
+-- Versión del servidor: 5.7.10-log
+-- Versión de PHP: 5.6.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `administrador`
 --
 
-CREATE TABLE IF NOT EXISTS `administrador` (
+CREATE TABLE `administrador` (
   `identificacion` int(10) NOT NULL,
   `nombre` varchar(25) NOT NULL,
   `apellidos` varchar(35) NOT NULL,
@@ -52,7 +52,7 @@ INSERT INTO `administrador` (`identificacion`, `nombre`, `apellidos`, `telefono`
 -- Estructura de tabla para la tabla `cargo`
 --
 
-CREATE TABLE IF NOT EXISTS `cargo` (
+CREATE TABLE `cargo` (
   `codigo` int(6) NOT NULL,
   `nombre` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -71,7 +71,7 @@ INSERT INTO `cargo` (`codigo`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `cliente`
 --
 
-CREATE TABLE IF NOT EXISTS `cliente` (
+CREATE TABLE `cliente` (
   `identificacion` int(10) NOT NULL,
   `nombre` varchar(25) NOT NULL,
   `apellidos` varchar(35) NOT NULL,
@@ -87,7 +87,8 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 --
 
 INSERT INTO `cliente` (`identificacion`, `nombre`, `apellidos`, `telefono`, `direccion`, `email`, `ciudad`, `celular`) VALUES
-(345, 'Juan', 'Perez', '2333', 'la ceja', 'jobepibe@hotmail.com', 'Bogota', '3124533456');
+(345, 'Juan', 'Perez', '2333', 'la ceja', 'jobepibe@hotmail.com', 'Bogota', '3124533456'),
+(73204401, 'Yair', 'Cardona', '661234', 'Barrio las palmeras', 'ycardona@gmail.com', 'Cartagena', '3123454323');
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,7 @@ INSERT INTO `cliente` (`identificacion`, `nombre`, `apellidos`, `telefono`, `dir
 -- Estructura de tabla para la tabla `empleado`
 --
 
-CREATE TABLE IF NOT EXISTS `empleado` (
+CREATE TABLE `empleado` (
   `identificacion` int(10) NOT NULL,
   `nombre` varchar(25) NOT NULL,
   `apellidos` varchar(35) NOT NULL,
@@ -120,7 +121,7 @@ INSERT INTO `empleado` (`identificacion`, `nombre`, `apellidos`, `telefono`, `di
 -- Estructura de tabla para la tabla `evento`
 --
 
-CREATE TABLE IF NOT EXISTS `evento` (
+CREATE TABLE `evento` (
   `codigo` int(60) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `nombre` varchar(20) NOT NULL,
@@ -132,6 +133,7 @@ CREATE TABLE IF NOT EXISTS `evento` (
   `no_AproxParticipantes` int(11) NOT NULL,
   `Recinto_codigo` int(60) NOT NULL,
   `Recurso_codigo` int(6) NOT NULL,
+  `cantidadRecurso` int(7) NOT NULL,
   `Administrador_identificacion` int(10) NOT NULL,
   `Cliente_identificacion` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -140,8 +142,10 @@ CREATE TABLE IF NOT EXISTS `evento` (
 -- Volcado de datos para la tabla `evento`
 --
 
-INSERT INTO `evento` (`codigo`, `descripcion`, `nombre`, `estado`, `fecha_inicio`, `fecha_fin`, `hora_inicio`, `hora_fin`, `no_AproxParticipantes`, `Recinto_codigo`, `Recurso_codigo`, `Administrador_identificacion`, `Cliente_identificacion`) VALUES
-(123, 'Matrimono', 'Juana''s Wedding', 'Activo', '2015-11-01 00:00:00', '2015-11-01 00:00:00', '14:00:00.00000', '22:00:00.00000', 100, 123, 123, 1234, 345);
+INSERT INTO `evento` (`codigo`, `descripcion`, `nombre`, `estado`, `fecha_inicio`, `fecha_fin`, `hora_inicio`, `hora_fin`, `no_AproxParticipantes`, `Recinto_codigo`, `Recurso_codigo`, `cantidadRecurso`, `Administrador_identificacion`, `Cliente_identificacion`) VALUES
+(123, 'Matrimono', 'Juana\'s Wedding', 'Activo', '2015-11-01 00:00:00', '2015-11-01 00:00:00', '14:00:00.00000', '22:00:00.00000', 100, 123, 123, 5, 1234, 345),
+(234, 'Quinceañeros', 'QUINCEAÑERO', 'Activo', '2015-10-01 00:00:00', '2015-10-01 00:00:00', '14:00:00.00000', '19:40:00.00000', 50, 123, 123, 10, 1234, 345),
+(345, 'Fiesta Infantil', 'FIESTA', 'Activo', '2015-10-01 00:00:00', '2015-10-01 00:00:00', '15:40:00.00000', '19:50:00.00000', 50, 123, 456, 30, 1234, 73204401);
 
 -- --------------------------------------------------------
 
@@ -149,7 +153,7 @@ INSERT INTO `evento` (`codigo`, `descripcion`, `nombre`, `estado`, `fecha_inicio
 -- Estructura de tabla para la tabla `factura`
 --
 
-CREATE TABLE IF NOT EXISTS `factura` (
+CREATE TABLE `factura` (
   `no_factura` int(6) NOT NULL,
   `cant_recurso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -160,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `factura` (
 -- Estructura de tabla para la tabla `proveedor`
 --
 
-CREATE TABLE IF NOT EXISTS `proveedor` (
+CREATE TABLE `proveedor` (
   `id` int(10) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `direccion` varchar(50) NOT NULL,
@@ -182,7 +186,7 @@ INSERT INTO `proveedor` (`id`, `nombre`, `direccion`, `telefono`, `celular`) VAL
 -- Estructura de tabla para la tabla `recinto`
 --
 
-CREATE TABLE IF NOT EXISTS `recinto` (
+CREATE TABLE `recinto` (
   `codigo` int(60) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `precio_uso` int(7) NOT NULL,
@@ -205,7 +209,7 @@ INSERT INTO `recinto` (`codigo`, `nombre`, `precio_uso`, `direccion`, `estado`, 
 -- Estructura de tabla para la tabla `recurso`
 --
 
-CREATE TABLE IF NOT EXISTS `recurso` (
+CREATE TABLE `recurso` (
   `codigo` int(6) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `precio_uso` int(7) NOT NULL,
@@ -221,7 +225,8 @@ CREATE TABLE IF NOT EXISTS `recurso` (
 --
 
 INSERT INTO `recurso` (`codigo`, `nombre`, `precio_uso`, `estado`, `tipo_propiedad`, `cantidad`, `descripcion`, `Proveedor_id`) VALUES
-(123, 'Silla Rimax', 70000, 'Excelente', 'Propio', 3, 'Silla roja 30kg', 1);
+(123, 'Silla Rimax', 70000, 'Excelente', 'Propio', 3, 'Silla roja 30kg', 1),
+(456, 'Mesa', 25000, 'Excelente', 'Propio', 10, 'mesa color blanco para estantes tipo bar', 0);
 
 -- --------------------------------------------------------
 
@@ -229,7 +234,7 @@ INSERT INTO `recurso` (`codigo`, `nombre`, `precio_uso`, `estado`, `tipo_propied
 -- Estructura de tabla para la tabla `solicitud`
 --
 
-CREATE TABLE IF NOT EXISTS `solicitud` (
+CREATE TABLE `solicitud` (
   `idSolicitud` int(6) NOT NULL,
   `fecha` datetime NOT NULL,
   `factura_no_factura` int(6) NOT NULL,
