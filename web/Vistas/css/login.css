@@ -1,0 +1,28 @@
+.boxlogin{
+	border-radius: 4px; /* bordes redondeados en los inputs*/
+	box-shadow: 0px 2px 7px #d6d6d6;
+	margin: 50px auto; /* se mueve 50 pixeles hacia el centro*/
+	width: 320px; /* con un tamaño de 20 pixeles*/
+    /*-webkit-border-radius: 4px;/* prefijos que usa  el navegador para hacer un degradado*/
+    /*-moz-border-radius: 4px;*/
+}
+.titulo{
+	font-family:"American Captain";
+	font-size:80px;
+    width:100%;
+	color:#FFF;
+    background: url(../imagenes/header.png) no-repeat 10px 10px, url(../imagenes/fondo_header.jpg);
+
+	height: 260px;
+}
+
+@font-face {
+        font-family: "American Captain";
+        src: url(../fuentes/American%20Captain.ttf) format("truetype");
+ }
+
+
+body{
+  background-color:#eee;
+}
+
